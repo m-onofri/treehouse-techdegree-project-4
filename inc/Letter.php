@@ -1,16 +1,13 @@
 <?php
 
-class Letter
+class Letter extends Char
 {
-    private $content;
     private $category;
-    private $status;
 
-    public function __construct($content, $category, $status)
+    public function __construct($content, $status, $category)
     {
-        $this->content = $content;
+        parent::__construct($content, $status);
         $this->category = $category;
-        $this->status = $status;
     }
 
     public function __toString()

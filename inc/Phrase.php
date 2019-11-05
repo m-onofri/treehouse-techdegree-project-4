@@ -51,16 +51,16 @@ class Phrase
         foreach ($phraseArr as $char) {
             switch (true) {
                 case preg_match("/\s/", $char):
-                    $this->arrayPhrase[] = new Letter($char, "space", "display");
+                    $this->arrayPhrase[] = new Letter($char, "display", "space");
                     break;
                 case preg_match("/[a-zA-Z]/", $char):
-                    $this->arrayPhrase[] = new Letter($char, "letter", "hide");
+                    $this->arrayPhrase[] = new Letter($char, "hide", "letter");
                     break;
                 case preg_match("/[,?!;:.]/", $char):
-                    $this->arrayPhrase[] = new Letter($char, "punctuation", "display");
+                    $this->arrayPhrase[] = new Letter($char, "display", "punctuation");
                     break;
                 default:
-                    $this->arrayPhrase[] = new Letter("*", "punctuation", "display");
+                    $this->arrayPhrase[] = new Letter("*", "display", "punctuation");
                     break;
             }
         }

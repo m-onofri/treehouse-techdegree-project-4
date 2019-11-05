@@ -1,4 +1,6 @@
 <?php
+include('inc/Char.php');
+include('inc/Key.php');
 include('inc/Letter.php');
 include('inc/Phrase.php');
 include('inc/Game.php');
@@ -26,7 +28,9 @@ $game = new Game($phrase);
 <div class="main-container">
     <div id="banner" class="section">
         <h2 class="header">Phrase Hunter</h2>
-        <?php echo $phrase->addPhraseToDisplay(); ?>
+        <?php echo $game->phrase->addPhraseToDisplay(); ?>
+        <?php echo $game->displayKeyboard(); ?>
+        <?php echo $game->displayScore(); ?>
     </div>
 </div>
 
