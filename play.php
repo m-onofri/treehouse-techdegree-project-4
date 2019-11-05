@@ -1,3 +1,16 @@
+<?php
+include('inc/Letter.php');
+include('inc/Phrase.php');
+include('inc/Game.php');
+
+$phrase = new Phrase("The Good, the Bad and the Ugly.");
+$game = new Game($phrase);
+// echo(var_dump($game));
+// die;
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +26,7 @@
 <div class="main-container">
     <div id="banner" class="section">
         <h2 class="header">Phrase Hunter</h2>
+        <?php echo $phrase->addPhraseToDisplay(); ?>
     </div>
 </div>
 

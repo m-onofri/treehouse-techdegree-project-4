@@ -130,6 +130,10 @@ input[type=submit].correct {
   animation-duration: .5s;
 }
 
+.punctuation {
+  font-size: 60px;
+}
+
 
 /* Keyboard */
 
