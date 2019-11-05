@@ -34,9 +34,23 @@ class Phrase
         return $phrase;
     }
 
+    public function updateStatusLetter($letter)
+    {
+        foreach ($this->arrayPhrase as $char) {
+            // echo(var_dump($char));
+            // die;
+            if ($letter == strtolower($char->getContent())) {
+                $char->setStatus("show");
+            }
+        }
+    }
+
     public function checkLetter($letter)
     {
-
+        if (strpos(strtolower($this->currentPhrase), $letter) >= 0) {
+            return true;
+        }
+        return false;
     }
 
     private function getRandomPhrase()

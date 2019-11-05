@@ -34,6 +34,27 @@ class Game
 
     }
 
+    public function handleUserChoice($choice)
+    {
+        if ($this->phrase->checkLetter($choice)) {
+            $this->phrase->updateStatusLetter($choice);
+        } else {
+            $this->remainingLives -= 1;
+        }
+        $this->updateKeyboard($choice);
+    }
+
+    private function updateKeyboard($key)
+    {
+        foreach ($this->keyboard as $keyrow) {
+            foreach ($keyrow as $keyObj) {
+                if ($keyObj->getContent() == $key) {
+                    $keyObj->setStatus('chosen');
+                }
+            }
+        }
+    }
+
     public function displayKeyboard()
     {
         $result = "<div id='qwerty' class='section'>";

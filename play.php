@@ -1,14 +1,28 @@
 <?php
+
 include('inc/Char.php');
 include('inc/Key.php');
 include('inc/Letter.php');
 include('inc/Phrase.php');
 include('inc/Game.php');
 
-$phrase = new Phrase("The Good, the Bad and the Ugly.");
-$game = new Game($phrase);
-// echo(var_dump($game));
-// die;
+session_start();
+
+if (empty($_GET['key'])) {
+    $phrase = new Phrase("Hello Kitty");
+    $game = new Game($phrase);
+    // echo(var_dump($game));
+    // die;
+    $_SESSION['game'] = $game;
+} else {
+    $key = trim(filter_input(INPUT_GET, 'key', FILTER_SANITIZE_STRING));
+    $game = $_SESSION['game'];
+    // echo(var_dump($game));
+    // die;
+    $game->handleUserChoice($key);
+    
+}
+
 
 ?>
 

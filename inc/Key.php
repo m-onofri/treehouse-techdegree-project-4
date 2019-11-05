@@ -5,6 +5,7 @@ class Key extends Char
 
     public function __toString()
     {
-        return "<button class='key $this->status'>$this->content</button>";
+        $url = "play.php?key=$this->content";
+        return "<button class='key $this->status'><a href='$url'>$this->content</a></button>";
     }
 }
