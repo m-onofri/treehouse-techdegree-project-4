@@ -5,19 +5,13 @@ class Game
     private $phrase;
     private $scoreBoard;
     private $lives = 5;
-    private $keysList = [
-        ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
-        ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
-        ["z", "x", "c", "v", "b", "n", "m"]
-    ];
-    private $keyboard = [];
+    private $keyboard;
 
     public function __construct($phrase)
     {
         $this->phrase = $phrase;
-        $this->scoreBoard = new ScoreBoard(5);
-
-        $this->createKeyboard();
+        $this->scoreBoard = new ScoreBoard();
+        $this->keyBoard = new KeyBoard();
     }
 
     public function getPhrase()
@@ -60,55 +54,21 @@ class Game
     {
         if ($this->phrase->checkLetter($choice)) {
             $this->phrase->updateStatusLetter($choice);
-            $this->updateKeyboard($choice, "correct");
+            $this->keyBoard->update($choice, "correct");
         } else {
             $this->scoreBoard->update();
-            $this->updateKeyboard($choice, "incorrect");
-        }
-    }
-
-    private function updateKeyboard($key, $newStatus)
-    {
-        foreach ($this->keyboard as $keyrow) {
-            foreach ($keyrow as $keyObj) {
-                if ($keyObj->getContent() == $key) {
-                    $keyObj->setStatus($newStatus);
-                }
-            }
+            $this->keyBoard->update($choice, "incorrect");
         }
     }
 
     public function displayKeyboard()
     {
-        $result = "<form method='post' action='play.php' id='qwerty' class='section'>";
-
-        foreach ($this->keyboard as $keyrow) {
-            $result .= "<div class='keyrow'>";
-            foreach ($keyrow as $keyObj) {
-                $result .= "$keyObj";
-            }
-            $result .= "</div>";
-        }
-
-        $result .= "</form>";
-        
-        return $result;
+        return $this->keyBoard->display();
     }
 
     public function displayScore()
     {
         return $this->scoreBoard->display();
 
-    }
-
-    private function createKeyboard()
-    {
-        foreach ($this->keysList as $keyrow) {
-            $row = [];
-            foreach ($keyrow as $keyLetter ) {
-                $row[] = new Key($keyLetter, "active");
-            }
-            $this->keyboard[] = $row;
-        }
     }
 }

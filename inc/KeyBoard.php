@@ -9,6 +9,11 @@ class Keyboard
     ];
     private $keyboard = [];
 
+    public function __construct()
+    {
+        $this->create();
+    }
+
     public function update($key, $newStatus)
     {
         foreach ($this->keyboard as $keyrow) {
