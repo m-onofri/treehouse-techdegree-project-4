@@ -4,6 +4,8 @@ include('inc/Char.php');
 include('inc/Key.php');
 include('inc/Letter.php');
 include('inc/Phrase.php');
+include('inc/KeyBoard.php');
+include('inc/ScoreBoard.php');
 include('inc/Game.php');
 
 session_start();

@@ -3,8 +3,8 @@
 class Game
 {
     private $phrase;
+    private $scoreBoard;
     private $lives = 5;
-    private $remainingLives = 5;
     private $keysList = [
         ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
         ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
@@ -15,6 +15,7 @@ class Game
     public function __construct($phrase)
     {
         $this->phrase = $phrase;
+        $this->scoreBoard = new ScoreBoard(5);
 
         $this->createKeyboard();
     }
@@ -38,7 +39,7 @@ class Game
 
     private function checkForLose()
     {
-        if ($this->remainingLives == 0) {
+        if ($this->scoreBoard->getRemainingLives() == 0) {
             return true;
         }
         return false;
@@ -61,7 +62,7 @@ class Game
             $this->phrase->updateStatusLetter($choice);
             $this->updateKeyboard($choice, "correct");
         } else {
-            $this->remainingLives = $this->remainingLives - 1;
+            $this->scoreBoard->update();
             $this->updateKeyboard($choice, "incorrect");
         }
     }
@@ -96,21 +97,7 @@ class Game
 
     public function displayScore()
     {
-        $lostLives = $this->lives - $this->remainingLives;
-        $result = "<div id='scoreboard' class='section'><ol>";
-        $result .= "<h4>Remaining Lives</h4>";
-
-        for ($i = 0; $i < $this->remainingLives; $i++) { 
-           $result .= " <li class='tries'><img src='images/liveHeart.png' height='35px' widght='30px'></li>";
-        }
-
-        for ($i = 0; $i < $lostLives; $i++) { 
-            $result .= " <li class='tries'><img src='images/lostHeart.png' height='35px' widght='30px'></li>";
-        }
-
-        $result .= "</ol></div>";
-
-        return $result;
+        return $this->scoreBoard->display();
 
     }
 
