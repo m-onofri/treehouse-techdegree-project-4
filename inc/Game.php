@@ -98,6 +98,7 @@ class Game
     {
         $lostLives = $this->lives - $this->remainingLives;
         $result = "<div id='scoreboard' class='section'><ol>";
+        $result .= "<h4>Remaining Lives</h4>";
 
         for ($i = 0; $i < $this->remainingLives; $i++) { 
            $result .= " <li class='tries'><img src='images/liveHeart.png' height='35px' widght='30px'></li>";

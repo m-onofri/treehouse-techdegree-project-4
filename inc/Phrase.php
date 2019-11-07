@@ -36,13 +36,20 @@ class Phrase
 
     public function addPhraseToDisplay()
     {
-        $phrase = "<div id='phrase' class='section'><ul>";
+        $phrase = "<div id='phrase' class='section'>";
+        $phrase .= "<div class='word'>";
 
         foreach ($this->arrayPhrase as $letter) {
-            $phrase .= "$letter";
+            if ($letter->getCategory() == "space") {
+                $phrase .= "</div>";
+                $phrase .= "$letter";
+                $phrase .= "<div class='word'>";
+            } else {
+                $phrase .= "$letter";
+            }
         }
 
-        $phrase .= "</ul></div>";
+        $phrase .= "</div></div>";
 
         return $phrase;
     }

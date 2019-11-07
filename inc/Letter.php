@@ -10,8 +10,13 @@ class Letter extends Char
         $this->category = $category;
     }
 
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
     public function __toString()
     {
-        return "<li class='$this->status $this->category'>$this->content</li>";
+        return "<div class='letter $this->status $this->category'>$this->content</div>";
     }
 }
