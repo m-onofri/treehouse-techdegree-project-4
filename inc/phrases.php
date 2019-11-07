@@ -9,6 +9,7 @@ $phrases = [
     "From Dusk till Down",
     "A Fistful of Dollars",
     "Flags of Our Fathers",
-    "Where Eagles Dare"
+    "Where Eagles Dare",
+    "The Good, the Ugly and the Bad"
 ];
 ?>

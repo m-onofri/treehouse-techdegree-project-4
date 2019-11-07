@@ -21,6 +21,11 @@ class Char
         $this->status = $newStatus;
     }
 
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
     public function __toString()
     {
         return "<li class='$this->status $this->category'>$this->content</li>";

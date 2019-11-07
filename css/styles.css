@@ -6,11 +6,11 @@
 :root {
   --color-win: #78CF82;
   --color-lose: #D94545;
-  --color-start: #5b85b7;
-  --color-neutral: #445069;
+  --color-start: #2e7ddd;
+  --color-neutral: #13347c;
   --color-neutral-light: #D2D2D2;
   --color-keys: #37474F;
-  --color-keys-light: #E5E5E5;
+  --color-keys-light: rgb(241, 240, 240);
   --font-size-large: 60px;
   --font-size-medium: 20px;
   --transition: all .2s ease-in-out;
@@ -26,6 +26,7 @@
 body {
   justify-content: space-evenly;
   flex-direction: column;
+  background-color: var( --color-start);
   display: flex;
   height: 100vh;
 }
@@ -46,7 +47,9 @@ h1 {
   font-size: 30px;
 }
 
-button, input[type=submit] {
+button, 
+input[type=submit],
+.btn {
   margin: 6px;
   border: 1px solid transparent;
   padding: .5rem 1rem;
@@ -54,9 +57,9 @@ button, input[type=submit] {
   font-size: var(--font-size-medium);
   background-color: var(--color-keys-light);
   border-radius: 5px;
-  -webkit-transition: var(--transition);
+  /* -webkit-transition: var(--transition);
   -o-transition: var(--transition);
-  transition: var(--transition);
+  transition: var(--transition); */
   cursor: pointer;
 }
 input[type=submit].incorrect {
@@ -68,7 +71,7 @@ input[type=submit].correct {
 
 #btn__reset {
 	width: 200px;
-	margin: 0 auto;
+	margin: 20px auto;
 }
 
 .main-container {
@@ -89,10 +92,15 @@ input[type=submit].correct {
   margin-top: 15px;
 }
 
+a {
+  text-decoration: none;
+  color:  #fff;
+}
+
 /* Title */
 
 .header {
-  color: #3a3f58;
+  color:  #fff;
 }
 
 
@@ -119,11 +127,11 @@ input[type=submit].correct {
 
 .show {
   color: #fff;
-  background-color: #4ac0d5;
-  font-size: 20px;
+  background-color: var(--color-neutral);
+  font-size: 24px;
   height: 65px;
   width: 65px;
-  padding: 20px 1px 0 1px;
+  padding: 16px 1px 0 1px;
   margin-right: 2px;
   border-radius: 5px;
   -webkit-animation-duration: .5s;
@@ -142,7 +150,7 @@ input[type=submit].correct {
   justify-content: center;
 }
 
-.chosen {
+input[type=submit].chosen {
   background: #3a3f58;
   border-radius: 5px;
   font-size: var(--font-size-medium);
@@ -154,7 +162,7 @@ input[type=submit].correct {
   color: #FFFFFF;
 }
 
-.btn__reset {
+#btn__reset {
   padding: 16px;
   margin: 50px auto;
   background: #f7a964;
@@ -165,12 +173,20 @@ input[type=submit].correct {
   border-right: solid 3px rgba(0, 0, 0, .3)
 }
 
-.btn__reset:active {
+#btn__reset:active {
   padding: 14px 16px 16px 14px;
   border-bottom: solid 4px rgba(0, 0, 0, 0);
   border-right: solid 3px rgba(0, 0, 0, 0);
 }
 
+/* Scoreboard */
+
+#scoreboard {
+  background-color: var(--color-keys-light);
+  width: 20%;
+  border-radius: 10px;
+  margin: 15px auto 0;
+}
 
 /* Overlay */
 
@@ -213,4 +229,8 @@ input[type=submit].correct {
 
 .lose a {
   color: var(--color-lose);
+}
+
+#game-over-message {
+  color: #fff;
 }

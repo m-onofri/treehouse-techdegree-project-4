@@ -1,5 +1,5 @@
 <?php
-
+include('inc/phrases.php');
 include('inc/Char.php');
 include('inc/Key.php');
 include('inc/Letter.php');
@@ -8,45 +8,34 @@ include('inc/Game.php');
 
 session_start();
 
-if (empty($_GET['key'])) {
-    $phrase = new Phrase("Hello Kitty");
-    $game = new Game($phrase);
-    // echo(var_dump($game));
-    // die;
+if (empty($_POST['key'])) {
+    $game = new Game(new Phrase($random_phrase));
+    $gamePhrase = $game->getPhrase();
     $_SESSION['game'] = $game;
 } else {
-    $key = trim(filter_input(INPUT_GET, 'key', FILTER_SANITIZE_STRING));
+    $key = trim(filter_input(INPUT_POST, 'key', FILTER_SANITIZE_STRING));
     $game = $_SESSION['game'];
-    // echo(var_dump($game));
-    // die;
-    $game->handleUserChoice($key);
-    
+    $gamePhrase = $game->getPhrase();
+    $game->handleUserChoice($key);   
 }
-
-
 ?>
 
+<?php include('inc/header.php'); ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Phrase Hunter</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/styles.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-</head>
+<?php if ($msg = $game->gameOver()) { ?>
 
-<body>
-<div class="main-container">
-    <div id="banner" class="section">
-        <h2 class="header">Phrase Hunter</h2>
-        <?php echo $game->phrase->addPhraseToDisplay(); ?>
-        <?php echo $game->displayKeyboard(); ?>
-        <?php echo $game->displayScore(); ?>
-    </div>
-</div>
+    <h1 id="game-over-message"><?php echo $msg; ?></h1>
+    <form action="play.php">
+        <input id="btn__reset" type="submit" value="Play Again" />
+    </form>
+    <a href="/" class="btn" id="btn__reset">Exit</a>
 
-</body>
-</html>
+<?php } else { ?>
+
+    <?php echo $gamePhrase->addPhraseToDisplay(); ?>
+    <?php echo $game->displayKeyboard(); ?>
+    <?php echo $game->displayScore(); ?>
+
+<?php } ?>
+
+<?php include('inc/footer.php'); ?>

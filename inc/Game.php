@@ -2,9 +2,9 @@
 
 class Game
 {
-    public $phrase;
-    public $lives = 5;
-    public $remainingLives = 5;
+    private $phrase;
+    private $lives = 5;
+    private $remainingLives = 5;
     private $keysList = [
         ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
         ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
@@ -19,37 +19,59 @@ class Game
         $this->createKeyboard();
     }
 
-    public function checkForWin()
+    public function getPhrase()
     {
-
+        return $this->phrase;
     }
 
-    public function checkForLose()
+    private function checkForWin()
     {
+        $remainingLetters = array_filter(
+            $this->phrase->getArrayPhrase(), 
+            function($a){return $a->getStatus() == "hide";});
 
+        if (count($remainingLetters) == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    private function checkForLose()
+    {
+        if ($this->remainingLives == 0) {
+            return true;
+        }
+        return false;
     }
 
     public function gameOver()
     {
-
+        if ($this->checkForWin()) {
+            return "Congratulations on guessing: '" . $this->phrase->getCurrentPhrase() . "'";
+        } elseif ($this->checkForLose()) {
+            return "The phrase was: '" . $this->phrase->getCurrentPhrase() . "'. Better luck next time!";
+        } else {
+            return false;
+        }
     }
 
     public function handleUserChoice($choice)
     {
         if ($this->phrase->checkLetter($choice)) {
             $this->phrase->updateStatusLetter($choice);
+            $this->updateKeyboard($choice, "correct");
         } else {
-            $this->remainingLives -= 1;
+            $this->remainingLives = $this->remainingLives - 1;
+            $this->updateKeyboard($choice, "incorrect");
         }
-        $this->updateKeyboard($choice);
     }
 
-    private function updateKeyboard($key)
+    private function updateKeyboard($key, $newStatus)
     {
         foreach ($this->keyboard as $keyrow) {
             foreach ($keyrow as $keyObj) {
                 if ($keyObj->getContent() == $key) {
-                    $keyObj->setStatus('chosen');
+                    $keyObj->setStatus($newStatus);
                 }
             }
         }
@@ -57,7 +79,7 @@ class Game
 
     public function displayKeyboard()
     {
-        $result = "<div id='qwerty' class='section'>";
+        $result = "<form method='post' action='play.php' id='qwerty' class='section'>";
 
         foreach ($this->keyboard as $keyrow) {
             $result .= "<div class='keyrow'>";
@@ -67,7 +89,7 @@ class Game
             $result .= "</div>";
         }
 
-        $result .= "</div>";
+        $result .= "</form>";
         
         return $result;
     }

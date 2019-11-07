@@ -2,9 +2,22 @@
 
 class Phrase 
 {
-    public $currentPhrase;
-    public $arrayPhrase = [];
+    private $currentPhrase;
+    private $arrayPhrase = [];
     private $selected = [];
+    private $phrases = [
+        "The Phantom Menace",
+        "The Empire Strikes Back",
+        "The Force Awakens",
+        "Attack of the Clones",
+        "Raiders of the Lost Ark",
+        "Once Upon a Time in the West",
+        "From Dusk till Down",
+        "A Fistful of Dollars",
+        "Flags of Our Fathers",
+        "Where Eagles Dare",
+        "The Good, the Ugly and the Bad"
+    ];
 
     public function __construct($currentPhrase = null, $selected = null)
     {
@@ -37,8 +50,6 @@ class Phrase
     public function updateStatusLetter($letter)
     {
         foreach ($this->arrayPhrase as $char) {
-            // echo(var_dump($char));
-            // die;
             if ($letter == strtolower($char->getContent())) {
                 $char->setStatus("show");
             }
@@ -47,15 +58,23 @@ class Phrase
 
     public function checkLetter($letter)
     {
-        if (strpos(strtolower($this->currentPhrase), $letter) >= 0) {
-            return true;
+        if (strpos(strtolower($this->currentPhrase), $letter) === false) {
+            return false;
         }
-        return false;
+        return true;
+    }
+
+    public function getArrayPhrase() {
+        return $this->arrayPhrase;
+    }
+
+    public function getCurrentPhrase() {
+        return $this->currentPhrase;
     }
 
     private function getRandomPhrase()
     {
-        # get random phrase from db
+        return $this->phrases[rand(0, count($this->phrases) - 1)];
     }
 
     private function setArrayPhrase()
