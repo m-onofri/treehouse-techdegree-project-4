@@ -6,6 +6,7 @@ class Char
     protected $status;
     protected $animate;
 
+    //It takes 3 parameters: content (string), status (string) and animate (boolean, by default false)
     public function __construct($content, $status, $animate = false)
     {
         $this->content = $content;
@@ -33,8 +34,10 @@ class Char
         $this->animate = $bool;
     }
 
-    public function __toString()
-    {
-        return "<li class='$this->status $this->category'>$this->content</li>";
-    }
+    /*It takes no parameters
+    **It returns a string containing the HTML specifically displaying a charachter */
+    // public function __toString()
+    // {
+    //     return "<li class='$this->status $this->category'>$this->content</li>";
+    // }
 }

@@ -16,24 +16,30 @@ class Phrase implements Board
         "A Fistful of Dollars",
         "Flags of Our Fathers",
         "Where Eagles Dare",
-        "The Good, the Ugly and the Bad"
+        "The Good, the Ugly and the Bad",
+        "They Shoot Horses, Don't They?"
     ];
 
+    //It takes 2 optional parameters: a phrase as a string and an array of letters
     public function __construct($currentPhrase = null, $selected = null)
     {
        if (!empty($currentPhrase)) {
            $this->currentPhrase = $currentPhrase;
        } else {
-          $this->currentPhrase = $this->getRandomPhrase(); 
+            //If no string is passed, it select a random phrase from the $phrases array
+            $this->currentPhrase = $this->getRandomPhrase(); 
        }
 
        if (!empty($selected)) {
            $this->selected = $selected;
        }
 
+       //The phrase is converted in ar array of Letter objects
        $this->setArrayPhrase();
     }
 
+    /*It takes no parameters
+    **It returns a string containing the HTML displaying the phrase */
     public function display()
     {
         $phrase = "<div id='phrase' class='section'>";
@@ -43,8 +49,11 @@ class Phrase implements Board
         return $phrase;
     }
 
+    /*It takes no parameters
+    **It returns a string containing the HTML specifically displaying the phrase */
     private function addPhraseToDisplay()
     {
+        //To prevent that words were cut off in the middle when the sentence is very long, each word is inserted inside a div
         $phrase = "<div class='word'>";
 
         foreach ($this->arrayPhrase as $letter) {
@@ -62,11 +71,13 @@ class Phrase implements Board
         return $phrase;
     }
 
-    public function update($letter= null, $newStatus = null)
+    //It takes 2 optional parameters: a letter as a string and a status as a string
+    //According to the letter chosen by the user, it updates the Letter object status and enable/disable animation
+    public function update($letter= null, $newStatus = "show")
     {
         foreach ($this->arrayPhrase as $char) {
             if ($letter == strtolower($char->getContent())) {
-                $char->setStatus("show");
+                $char->setStatus($newStatus);
                 $char->setAnimate(true);
             } else {
                 $char->setAnimate(false);
@@ -74,6 +85,8 @@ class Phrase implements Board
         }
     }
 
+    /*It takes one parameter: the letter chosen by the user as a string
+    **It returns tru if the letter matches with one letterin the phrase, otherwise it returns false*/
     public function checkLetter($letter)
     {
         if (strpos(strtolower($this->currentPhrase), $letter) === false) {
@@ -90,11 +103,15 @@ class Phrase implements Board
         return $this->currentPhrase;
     }
 
+    /*It takes no parameters
+    **It returns a random phrase from the ones stored in the $phrase array */
     private function getRandomPhrase()
     {
         return $this->phrases[rand(0, count($this->phrases) - 1)];
     }
 
+    /*It takes no parameters
+    **For each charachters in the phrase, it creates a new Letter objects, and store them in the $arrayPhrase **property*/
     private function setArrayPhrase()
     {
         $phraseArr = str_split($this->currentPhrase);
@@ -107,7 +124,7 @@ class Phrase implements Board
                 case preg_match("/[a-zA-Z]/", $char):
                     $this->arrayPhrase[] = new Letter($char, "hide", "letter");
                     break;
-                case preg_match("/[,?!;:.]/", $char):
+                case preg_match("/[,?!;:.']/", $char):
                     $this->arrayPhrase[] = new Letter($char, "display", "punctuation");
                     break;
                 default:

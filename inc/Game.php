@@ -7,6 +7,8 @@ class Game
     private $lives = 5;
     private $keyboard;
 
+    /*It takes 2 parameters: a Phrase object and an integer as the number of lives (optional)
+    **It creates a new ScoreBoard object and a new keyBoard object*/
     public function __construct($phrase, $lives = null)
     {
         $this->phrase = $phrase;
@@ -14,8 +16,11 @@ class Game
         $this->keyBoard = new KeyBoard();
     }
 
+    /*It takes no parameters
+    **It checks if all the letters of the Phrase are displayed; if yes it returns true, otherwise false */
     private function checkForWin()
     {
+        //It finds how many letters are not displayed yet
         $remainingLetters = array_filter(
             $this->phrase->getArrayPhrase(), 
             function($a){return $a->getStatus() == "hide";});
@@ -26,6 +31,8 @@ class Game
         return false;
     }
 
+    /*It takes no parameters
+    **It checks if the user lost all his lives; if yes it returns true, otherwise false */
     private function checkForLose()
     {
         if ($this->scoreBoard->getRemainingLives() == 0) {
@@ -34,6 +41,10 @@ class Game
         return false;
     }
 
+    /*It takes no parameters
+    **It checks if the game is over and if the user won or lost the game. 
+    **If the game is not over it returns false, 
+    ** otherwise it returns an array with the status of the match (win or lose) and a relative message*/
     public function gameOver()
     {
         if ($this->checkForWin()) {
@@ -51,6 +62,9 @@ class Game
         }
     }
 
+    /*It takes 1 parameter: a string corresponding tho the letter chosen by the user
+    **It checks if the letter chosen by the user matches with one or more in the phrase and
+    **it updates the Phrase, the KeyBoard and the ScoreBoard objects accordingly.*/
     public function handleUserChoice($choice)
     {
         $this->phrase->update($choice);
@@ -62,17 +76,20 @@ class Game
         }
     }
 
+    //Display the keyboard on the screen
     public function displayKeyboard()
     {
         return $this->keyBoard->display();
     }
 
-    public function displayScore()
+    //Display the ScoreBoard on the screen
+    public function displayScoreBoard()
     {
         return $this->scoreBoard->display();
 
     }
 
+    //Display the phrase on the screen
     public function displayPhrase()
     {
         return $this->phrase->display();

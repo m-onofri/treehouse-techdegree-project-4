@@ -6,8 +6,8 @@ class ScoreBoard implements Board
     private $remainingLives = 5;
     private $urlLiveHeart = "images/liveHeart.png";
     private $urlLostHeart = "images/lostHeart.png";
-    private $scoreBoard = [];
 
+    //It takes 1 optional parameter: the number of lives a an integer (by default is 5)
     public function __construct($lives = null)
     {
         if (!empty($lives)) {
@@ -16,6 +16,8 @@ class ScoreBoard implements Board
         }
     }
 
+    /*It takes no parameters
+    **It returns a string containing the HTML displaying the ScoreBoard */
     public function display()
     {
         $result = "<div id='scoreboard' class='section'><ol>";
@@ -29,11 +31,15 @@ class ScoreBoard implements Board
 
     }
 
+    //It takes 2 optional parameters: a letter as a string and a status as a string
+    //It reduces by 1 $remainingLives
     public function update($key = NULL, $newStatus = NULL)
     {
         $this->remainingLives -= 1;
     }
 
+    /*It takes no parameters
+    **It returns a string containing the HTML specifically displaying the ScoreBoard */
     private function create()
     {
         $lostLives = $this->lives - $this->remainingLives;
