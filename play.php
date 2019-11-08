@@ -1,5 +1,4 @@
 <?php
-include('inc/phrases.php');
 include('inc/Char.php');
 include('inc/Key.php');
 include('inc/Letter.php');
@@ -11,30 +10,29 @@ include('inc/Game.php');
 session_start();
 
 if (empty($_POST['key'])) {
-    $game = new Game(new Phrase($random_phrase));
-    $gamePhrase = $game->getPhrase();
+    $game = new Game();
     $_SESSION['game'] = $game;
 } else {
     $key = trim(filter_input(INPUT_POST, 'key', FILTER_SANITIZE_STRING));
     $game = $_SESSION['game'];
-    $gamePhrase = $game->getPhrase();
     $game->handleUserChoice($key);   
 }
 ?>
 
 <?php include('inc/header.php'); ?>
 
-<?php if ($msg = $game->gameOver()) { ?>
-
-    <h1 id="game-over-message"><?php echo $msg; ?></h1>
-    <form action="play.php">
-        <input id="btn__reset" type="submit" value="Play Again" />
-    </form>
-    <a href="/" class="btn" id="btn__reset">Exit</a>
+<?php if ($result = $game->gameOver()) { ?>
+    <div id="game-over-message" class="<?php echo $result['status']; ?>">
+        <h1><?php echo $result['msg']; ?></h1>
+    </div>
+    <div class="buttons">
+        <a href="play.php" class="btn">Play Again</a>
+        <a href="/" class="btn">Exit</a>
+    </div>
 
 <?php } else { ?>
 
-    <?php echo $gamePhrase->addPhraseToDisplay(); ?>
+    <?php echo $game->displayPhrase(); ?>
     <?php echo $game->displayKeyboard(); ?>
     <?php echo $game->displayScore(); ?>
 

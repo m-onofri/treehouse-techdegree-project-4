@@ -66,17 +66,13 @@ input[type=submit],
   background-color: var(--color-keys-light);
   border-radius: 5px;
   border-bottom: solid 4px rgba(0, 0, 0, .3);
-  border-right: solid 3px rgba(0, 0, 0, .3)
-  /* -webkit-transition: var(--transition);
-  -o-transition: var(--transition);
-  transition: var(--transition); */
+  border-right: solid 3px rgba(0, 0, 0, .3);
   cursor: pointer;
 }
 button:active,
 input[type=submit]:active,
 .btn:active
  {
-  /* padding: 14px 16px 16px 14px; */
   border-bottom: solid 4px rgba(0, 0, 0, 0);
   border-right: solid 3px rgba(0, 0, 0, 0);
 }
@@ -91,7 +87,7 @@ input[type=submit].correct {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 100%;
+  height: 100vh;
   max-height: 900px;
   text-align: center;
 }
@@ -126,7 +122,10 @@ ul#rules li {
   font-size: 18px;
 }
 
-
+#banner {
+  height: 100vh;
+  padding: 2rem;
+}
 
 /* Title */
 
@@ -267,7 +266,7 @@ input[type=submit].chosen {
   color: #fff;
 }
 
-.win {
+#game-over-message.win {
   background-color: var(--color-win);
 }
 
@@ -275,7 +274,7 @@ input[type=submit].chosen {
   color: var(--color-win);
 }
 
-.lose {
+#game-over-message.lose {
   background-color: #f5785f;
 }
 
@@ -284,5 +283,15 @@ input[type=submit].chosen {
 }
 
 #game-over-message {
+  margin: 5rem auto 9rem;
+  width:80%;
+  padding: 1rem;
+  background-color: lightcoral;
+  border-radius: 10px;
+
   color: #fff;
+}
+
+.buttons .btn {
+  background: #f7a964;
 }

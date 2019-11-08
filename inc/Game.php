@@ -7,16 +7,11 @@ class Game
     private $lives = 5;
     private $keyboard;
 
-    public function __construct($phrase)
+    public function __construct($currentPhrase = null, $selected = null, $lives = null)
     {
-        $this->phrase = $phrase;
-        $this->scoreBoard = new ScoreBoard();
+        $this->phrase = new Phrase($currentPhrase = null, $selected = null);
+        $this->scoreBoard = new ScoreBoard($lives = null);
         $this->keyBoard = new KeyBoard();
-    }
-
-    public function getPhrase()
-    {
-        return $this->phrase;
     }
 
     private function checkForWin()
@@ -42,9 +37,15 @@ class Game
     public function gameOver()
     {
         if ($this->checkForWin()) {
-            return "Congratulations on guessing: '" . $this->phrase->getCurrentPhrase() . "'";
+            return [
+                'msg' => "Congratulations on guessing: '" . $this->phrase->getCurrentPhrase() . "'",
+                'status' => 'win'
+            ];
         } elseif ($this->checkForLose()) {
-            return "The phrase was: '" . $this->phrase->getCurrentPhrase() . "'. Better luck next time!";
+            return [
+                'msg' => "The phrase was: '" . $this->phrase->getCurrentPhrase() . "'. Better luck next time!",
+                'status' => 'lose'
+            ];
         } else {
             return false;
         }
@@ -70,5 +71,10 @@ class Game
     {
         return $this->scoreBoard->display();
 
+    }
+
+    public function displayPhrase()
+    {
+        return $this->phrase->addPhraseToDisplay();
     }
 }
