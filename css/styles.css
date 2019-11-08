@@ -151,6 +151,12 @@ ul#rules li {
   display: none;
 }
 
+.punctuation {
+  background: none;
+  padding: 0;
+  width: 30px;
+}
+
 .hide {
   color: transparent;
 }

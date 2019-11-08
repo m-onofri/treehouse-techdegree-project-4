@@ -1,6 +1,6 @@
 <?php
 
-class Keyboard
+class Keyboard implements Board
 {
     private $keysList = [
         ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
@@ -14,12 +14,15 @@ class Keyboard
         $this->create();
     }
 
-    public function update($key, $newStatus)
+    public function update($key=null, $newStatus=null)
     {
         foreach ($this->keyboard as $keyrow) {
             foreach ($keyrow as $keyObj) {
                 if ($keyObj->getContent() == $key) {
                     $keyObj->setStatus($newStatus);
+                    $keyObj->setAnimate(true);
+                } else {
+                    $keyObj->setAnimate(false);
                 }
             }
         }

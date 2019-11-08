@@ -7,9 +7,9 @@ class Game
     private $lives = 5;
     private $keyboard;
 
-    public function __construct($currentPhrase = null, $selected = null, $lives = null)
+    public function __construct($phrase, $lives = null)
     {
-        $this->phrase = new Phrase($currentPhrase = null, $selected = null);
+        $this->phrase = $phrase;
         $this->scoreBoard = new ScoreBoard($lives = null);
         $this->keyBoard = new KeyBoard();
     }
@@ -38,12 +38,12 @@ class Game
     {
         if ($this->checkForWin()) {
             return [
-                'msg' => "Congratulations on guessing: '" . $this->phrase->getCurrentPhrase() . "'",
+                'msg' => "<h1>Congratulations on guessing:</h1><h1>'" . $this->phrase->getCurrentPhrase() . "'</h1>",
                 'status' => 'win'
             ];
         } elseif ($this->checkForLose()) {
             return [
-                'msg' => "The phrase was: '" . $this->phrase->getCurrentPhrase() . "'. Better luck next time!",
+                'msg' => "<h1>The phrase was:</h1><h1>'" . $this->phrase->getCurrentPhrase() . "'</h1><h1> Better luck next time!<h1>",
                 'status' => 'lose'
             ];
         } else {
@@ -53,8 +53,8 @@ class Game
 
     public function handleUserChoice($choice)
     {
+        $this->phrase->update($choice);
         if ($this->phrase->checkLetter($choice)) {
-            $this->phrase->updateStatusLetter($choice);
             $this->keyBoard->update($choice, "correct");
         } else {
             $this->scoreBoard->update();
@@ -75,6 +75,6 @@ class Game
 
     public function displayPhrase()
     {
-        return $this->phrase->addPhraseToDisplay();
+        return $this->phrase->display();
     }
 }

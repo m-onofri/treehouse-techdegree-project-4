@@ -2,6 +2,7 @@
 include('inc/Char.php');
 include('inc/Key.php');
 include('inc/Letter.php');
+include('inc/Board.php');
 include('inc/Phrase.php');
 include('inc/KeyBoard.php');
 include('inc/ScoreBoard.php');
@@ -10,7 +11,8 @@ include('inc/Game.php');
 session_start();
 
 if (empty($_POST['key'])) {
-    $game = new Game();
+    $phrase = new Phrase();
+    $game = new Game($phrase);
     $_SESSION['game'] = $game;
 } else {
     $key = trim(filter_input(INPUT_POST, 'key', FILTER_SANITIZE_STRING));
@@ -22,8 +24,8 @@ if (empty($_POST['key'])) {
 <?php include('inc/header.php'); ?>
 
 <?php if ($result = $game->gameOver()) { ?>
-    <div id="game-over-message" class="<?php echo $result['status']; ?>">
-        <h1><?php echo $result['msg']; ?></h1>
+    <div id="game-over-message" class="<?php echo $result['status']; ?> animated bounceInUp">
+        <?php echo $result['msg']; ?>
     </div>
     <div class="buttons">
         <a href="play.php" class="btn">Play Again</a>
@@ -38,4 +40,11 @@ if (empty($_POST['key'])) {
 
 <?php } ?>
 
-<?php include('inc/footer.php'); ?>
+<?php include('inc/footer.php'); 
+
+//TODO:
+// Write the README file
+// 
+
+
+?>

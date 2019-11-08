@@ -4,11 +4,13 @@ class Char
 {
     protected $content;
     protected $status;
+    protected $animate;
 
-    public function __construct($content, $status)
+    public function __construct($content, $status, $animate = false)
     {
         $this->content = $content;
         $this->status = $status;
+        $this->animate = $animate;
     }
 
     public function getContent()
@@ -24,6 +26,11 @@ class Char
     public function getStatus()
     {
         return $this->status;
+    }
+
+    public function setAnimate($bool)
+    {
+        $this->animate = $bool;
     }
 
     public function __toString()

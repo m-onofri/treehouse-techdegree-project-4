@@ -1,6 +1,6 @@
 <?php
 
-class Phrase 
+class Phrase implements Board
 {
     private $currentPhrase;
     private $arrayPhrase = [];
@@ -34,10 +34,18 @@ class Phrase
        $this->setArrayPhrase();
     }
 
-    public function addPhraseToDisplay()
+    public function display()
     {
         $phrase = "<div id='phrase' class='section'>";
-        $phrase .= "<div class='word'>";
+        $phrase .= $this->addPhraseToDisplay();
+        $phrase .= "</div>";
+
+        return $phrase;
+    }
+
+    private function addPhraseToDisplay()
+    {
+        $phrase = "<div class='word'>";
 
         foreach ($this->arrayPhrase as $letter) {
             if ($letter->getCategory() == "space") {
@@ -49,16 +57,19 @@ class Phrase
             }
         }
 
-        $phrase .= "</div></div>";
+        $phrase .= "</div>";
 
         return $phrase;
     }
 
-    public function updateStatusLetter($letter)
+    public function update($letter= null, $newStatus = null)
     {
         foreach ($this->arrayPhrase as $char) {
             if ($letter == strtolower($char->getContent())) {
                 $char->setStatus("show");
+                $char->setAnimate(true);
+            } else {
+                $char->setAnimate(false);
             }
         }
     }

@@ -3,10 +3,11 @@
 class Letter extends Char
 {
     private $category;
+    private $animation = "animated flipInY";
 
-    public function __construct($content, $status, $category)
+    public function __construct($content, $status, $category, $animate = false)
     {
-        parent::__construct($content, $status);
+        parent::__construct($content, $status, $animate);
         $this->category = $category;
     }
 
@@ -17,6 +18,10 @@ class Letter extends Char
 
     public function __toString()
     {
-        return "<div class='letter $this->status $this->category'>$this->content</div>";
+        $classAttrs = "letter $this->status $this->category";
+        if ($this->animate) {
+           $classAttrs .= " $this->animation";
+        }
+        return "<div class='$classAttrs'>$this->content</div>";
     }
 }
