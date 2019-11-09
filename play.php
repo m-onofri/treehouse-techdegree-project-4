@@ -12,7 +12,7 @@ session_start();
 
 if (empty($_POST['key'])) {
     //Create a new Phrase objext
-    $phrase = new Phrase("They Shoot Horses, Don't They?");
+    $phrase = new Phrase();
     //Create a new Game object
     $game = new Game($phrase);
     //The Game object is assigned by reference to the SESSION

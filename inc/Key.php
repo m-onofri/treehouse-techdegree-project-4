@@ -13,7 +13,7 @@ class Key extends Char
             $classAttrs .= " $this->animation";
         }
         
-        $html = "<input type='submit' name='key' value='$this->content' class='$classAttrs'";
+        $html = "<input type='submit' id='$this->content' onkeypress='submitForm' name='key' value='$this->content' class='$classAttrs'";
 
         if ($this->status != 'active') {
             $html.=" disabled";
