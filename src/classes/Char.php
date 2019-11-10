@@ -1,6 +1,6 @@
 <?php
 
-class Char
+abstract class Char
 {
     protected $content;
     protected $status;
@@ -36,8 +36,5 @@ class Char
 
     /*It takes no parameters
     **It returns a string containing the HTML specifically displaying a charachter */
-    // public function __toString()
-    // {
-    //     return "<li class='$this->status $this->category'>$this->content</li>";
-    // }
+    abstract public function __toString();
 }

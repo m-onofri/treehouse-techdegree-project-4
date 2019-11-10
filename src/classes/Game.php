@@ -49,12 +49,12 @@ class Game
     {
         if ($this->checkForWin()) {
             return [
-                'msg' => "<h1>Congratulations on guessing:</h1><h1>'" . $this->phrase->getCurrentPhrase() . "'</h1>",
+                'msg' => "<h4>Congratulations on guessing:</h4><h3>'" . $this->phrase->getCurrentPhrase() . "'</h3>",
                 'status' => 'win'
             ];
         } elseif ($this->checkForLose()) {
             return [
-                'msg' => "<h1>The phrase was:</h1><h1>'" . $this->phrase->getCurrentPhrase() . "'</h1><h1> Better luck next time!<h1>",
+                'msg' => "<h4>The phrase was:</h4><h3>'" . $this->phrase->getCurrentPhrase() . "'</h3><h4> Better luck next time!<h4>",
                 'status' => 'lose'
             ];
         } else {

@@ -109,7 +109,7 @@ a {
 ul#rules {
   display: block;
   width:80%;
-  margin: 0 auto;
+  margin: 1rem auto 3rem;
   text-align: left;
   color: #fff;
   list-style: square outside none;
@@ -125,6 +125,10 @@ ul#rules li {
 #banner {
   height: 100vh;
   padding: 2rem;
+}
+
+#banner h3 {
+  margin: 2rem auto 1rem;
 }
 
 /* Title */
@@ -273,7 +277,8 @@ input[type=submit].chosen {
 }
 
 #game-over-message.win {
-  background-color: var(--color-win);
+  background-color: #78CF82;
+  border: 5px solid rgb(83, 143, 90);
 }
 
 .win a {
@@ -282,6 +287,7 @@ input[type=submit].chosen {
 
 #game-over-message.lose {
   background-color: #f5785f;
+  border: 5px solid  #913c3c;
 }
 
 .lose a {
@@ -292,7 +298,6 @@ input[type=submit].chosen {
   margin: 5rem auto 9rem;
   width:80%;
   padding: 1rem;
-  background-color: lightcoral;
   border-radius: 10px;
 
   color: #fff;

@@ -1,12 +1,5 @@
 <?php
-include('inc/Char.php');
-include('inc/Key.php');
-include('inc/Letter.php');
-include('inc/Board.php');
-include('inc/Phrase.php');
-include('inc/KeyBoard.php');
-include('inc/ScoreBoard.php');
-include('inc/Game.php');
+include('src/config.php');
 
 session_start();
 
@@ -27,7 +20,7 @@ if (empty($_POST['key'])) {
 }
 ?>
 
-<?php include('inc/header.php'); ?>
+<?php include('src/inc/header.php'); ?>
 
 <?php if ($result = $game->gameOver()) { ?>
     <!-- If the game is over, display the phrase and the result -->
@@ -47,7 +40,7 @@ if (empty($_POST['key'])) {
 
 <?php } ?>
 
-<?php include('inc/footer.php'); 
+<?php include('src/inc/footer.php'); 
 
 
 ?>

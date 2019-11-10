@@ -4,8 +4,8 @@ class ScoreBoard implements Board
 {
     public $lives = 5;
     private $remainingLives = 5;
-    private $urlLiveHeart = "images/liveHeart.png";
-    private $urlLostHeart = "images/lostHeart.png";
+    private $urlLiveHeart = "assets/images/liveHeart.png";
+    private $urlLostHeart = "assets/images/lostHeart.png";
 
     //It takes 1 optional parameter: the number of lives a an integer (by default is 5)
     public function __construct($lives = null)
