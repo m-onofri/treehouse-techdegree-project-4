@@ -3,6 +3,7 @@
 class Phrase implements Board
 {
     private $currentPhrase;
+    private $currentPhraseId;
     private $arrayPhrase = [];
     private $selected = [];
     private $phrases = [
@@ -21,13 +22,13 @@ class Phrase implements Board
     ];
 
     //It takes 2 optional parameters: a phrase as a string and an array of letters
-    public function __construct($currentPhrase = null, $selected = null)
+    public function __construct($currentPhrase = null, $selected = null, $previousPhraseIndex= null)
     {
        if (!empty($currentPhrase)) {
            $this->currentPhrase = $currentPhrase;
        } else {
-            //If no string is passed, it select a random phrase from the $phrases array
-            $this->currentPhrase = $this->getRandomPhrase(); 
+            //If no phrase is passed, it select a random phrase from the $phrases array
+            $this->currentPhrase = $this->getRandomPhrase($previousPhraseIndex); 
        }
 
        if (!empty($selected)) {
@@ -103,11 +104,22 @@ class Phrase implements Board
         return $this->currentPhrase;
     }
 
-    /*It takes no parameters
+    public function getCurrentPhraseId() {
+        return $this->currentPhraseId;
+    }
+
+    /*It takes one optional parameter: the index of the previous phrase as an integer
     **It returns a random phrase from the ones stored in the $phrase array */
-    private function getRandomPhrase()
+    private function getRandomPhrase($previousPhraseIndex = null)
     {
-        return $this->phrases[rand(0, count($this->phrases) - 1)];
+        $index = rand(0, count($this->phrases)- 1);
+        if (!empty($previousPhraseIndex)) {
+            while ($index == $previousPhraseIndex) {
+                $index = rand(0, count($this->phrases)- 1);
+            }
+        }
+        $this->currentPhraseId = $index;
+        return $this->phrases[$index];
     }
 
     /*It takes no parameters

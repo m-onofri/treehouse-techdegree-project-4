@@ -4,9 +4,13 @@ include('src/config.php');
 session_start();
 
 if (empty($_POST['key'])) {
-    //Create a new Phrase objext
-    $phrase = new Phrase();
-    //Create a new Game object
+    if (!empty($_GET["last_id"])) {
+        //Get and filter the index of the phrase displayed in the previous turn
+        $last_id = filter_input(INPUT_GET, 'last_id', FILTER_SANITIZE_NUMBER_INT);
+        $phrase = new Phrase(null, null, $last_id);
+    } else {
+        $phrase = new Phrase();
+    }
     $game = new Game($phrase);
     //The Game object is assigned by reference to the SESSION
     $_SESSION['game'] = $game;
@@ -18,29 +22,19 @@ if (empty($_POST['key'])) {
     //Check the user choice and update the Phrase, the Keyboard and the Scoreboard
     $game->handleUserChoice($key);   
 }
-?>
 
-<?php include('src/inc/header.php'); ?>
+include('src/inc/header.php');
 
-<?php if ($result = $game->gameOver()) { ?>
-    <!-- If the game is over, display the phrase and the result -->
-    <div id="game-over-message" class="<?php echo $result['status']; ?> animated bounceInUp">
-        <?php echo $result['msg']; ?>
-    </div>
-    <div class="buttons">
-        <a href="play.php" class="btn">Play Again</a>
-        <a href="/treehouse-techdegree-project-4" class="btn">Exit</a>
-    </div>
+if ($result = $game->gameOver()) {
 
-<?php } else { ?>
-    <!-- If the game is not over, display the Phrase, the Keyboard and the Scoreboard -->
-    <?php echo $game->displayPhrase(); ?>
-    <?php echo $game->displayKeyboard(); ?>
-    <?php echo $game->displayScoreBoard(); ?>
+    //If the game is over, display the phrase and the result
+    include('src/inc/finalPage.php');
+} else {
 
-<?php } ?>
+    //If the game is not over, display the Phrase, the Keyboard and the Scoreboard
+    echo $game->displayPhrase();
+    echo $game->displayKeyboard();
+    echo $game->displayScoreBoard();
+} 
 
-<?php include('src/inc/footer.php'); 
-
-
-?>
+include('src/inc/footer.php'); 

@@ -76,6 +76,11 @@ class Game
         }
     }
 
+    public function getCurrentPhraseId()
+    {
+        return $this->phrase->getCurrentPhraseId();
+    }
+
     //Display the keyboard on the screen
     public function displayKeyboard()
     {
