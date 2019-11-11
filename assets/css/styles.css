@@ -103,7 +103,7 @@ input[type=submit].correct {
 
 a {
   text-decoration: none;
-  color:  #fff;
+  /*color:  #fff;*/
 }
 
 ul#rules {
@@ -161,7 +161,8 @@ ul#rules li {
   width: 30px;
 }
 
-.hide {
+.hide,
+.hide a {
   color: transparent;
 }
 

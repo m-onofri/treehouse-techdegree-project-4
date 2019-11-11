@@ -12,4 +12,4 @@
 <body>
 <div class="main-container">
 <div id="banner" class="section">
-    <h2 class="header"><a href="/play.php">Phrase Hunter<a></h2>
+    <h2 class="header">Phrase Hunter</h2>

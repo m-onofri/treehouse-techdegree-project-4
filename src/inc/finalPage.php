@@ -3,5 +3,5 @@
 </div>
 <div class="buttons">
     <a href="<?php echo 'play.php?last_id=' . $game->getCurrentPhraseId(); ?>" class="btn">Play Again</a>
-    <a href="/treehouse-techdegree-project-4" class="btn">Exit</a>
+    <a href="index.php" class="btn">Exit</a>
 </div>
