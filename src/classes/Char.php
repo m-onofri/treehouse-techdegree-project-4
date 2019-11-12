@@ -14,6 +14,7 @@ abstract class Char
         $this->animate = $animate;
     }
 
+    //Getter and setter methods
     public function getContent()
     {
         return $this->content;

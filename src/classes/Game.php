@@ -17,6 +17,27 @@ class Game
     }
 
     /*It takes no parameters
+    **It checks if the game is over and if the user won or lost the game. 
+    **If the game is not over it returns false, 
+    ** otherwise it returns an array with the status of the match (win or lose) and a relative message*/
+    public function gameOver()
+    {
+        if ($this->checkForWin()) {
+            return [
+                'msg' => "<h4>Congratulations on guessing:</h4><h3>'" . $this->phrase->getCurrentPhrase() . "'</h3>",
+                'status' => 'win'
+            ];
+        } elseif ($this->checkForLose()) {
+            return [
+                'msg' => "<h4>The phrase was:</h4><h3>'" . $this->phrase->getCurrentPhrase() . "'</h3><h4> Better luck next time!<h4>",
+                'status' => 'lose'
+            ];
+        } else {
+            return false;
+        }
+    }
+
+    /*It takes no parameters
     **It checks if all the letters of the Phrase are displayed; if yes it returns true, otherwise false */
     private function checkForWin()
     {
@@ -41,27 +62,6 @@ class Game
         return false;
     }
 
-    /*It takes no parameters
-    **It checks if the game is over and if the user won or lost the game. 
-    **If the game is not over it returns false, 
-    ** otherwise it returns an array with the status of the match (win or lose) and a relative message*/
-    public function gameOver()
-    {
-        if ($this->checkForWin()) {
-            return [
-                'msg' => "<h4>Congratulations on guessing:</h4><h3>'" . $this->phrase->getCurrentPhrase() . "'</h3>",
-                'status' => 'win'
-            ];
-        } elseif ($this->checkForLose()) {
-            return [
-                'msg' => "<h4>The phrase was:</h4><h3>'" . $this->phrase->getCurrentPhrase() . "'</h3><h4> Better luck next time!<h4>",
-                'status' => 'lose'
-            ];
-        } else {
-            return false;
-        }
-    }
-
     /*It takes 1 parameter: a string corresponding tho the letter chosen by the user
     **It checks if the letter chosen by the user matches with one or more in the phrase and
     **it updates the Phrase, the KeyBoard and the ScoreBoard objects accordingly.*/
@@ -74,11 +74,6 @@ class Game
             $this->scoreBoard->update();
             $this->keyBoard->update($choice, "incorrect");
         }
-    }
-
-    public function getCurrentPhraseId()
-    {
-        return $this->phrase->getCurrentPhraseId();
     }
 
     //Display the keyboard on the screen
@@ -98,5 +93,10 @@ class Game
     public function displayPhrase()
     {
         return $this->phrase->display();
+    }
+
+    public function getCurrentPhraseId()
+    {
+        return $this->phrase->getCurrentPhraseId();
     }
 }

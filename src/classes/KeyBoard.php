@@ -14,6 +14,19 @@ class Keyboard implements Board
         $this->create();
     }
 
+    /*It takes no parameters
+    **For each key in the keyboard, it creates a new Key object, and store them in the $keyboard property*/
+    private function create()
+    {
+        foreach ($this->keysList as $keyrow) {
+            $row = [];
+            foreach ($keyrow as $keyLetter ) {
+                $row[] = new Key($keyLetter, "active");
+            }
+            $this->keyboard[] = $row;
+        }
+    }
+
     //It takes 2 optional parameters: a letter as a string and a status as a string
     //According to the letter chosen by the user, it updates the Key object status and enable/disable animation
     public function update($key=null, $newStatus=null)
@@ -47,18 +60,5 @@ class Keyboard implements Board
         $result .= "</form>";
         
         return $result;
-    }
-
-    /*It takes no parameters
-    **For each key in the keyboard, it creates a new Key object, and store them in the $keyboard property*/
-    private function create()
-    {
-        foreach ($this->keysList as $keyrow) {
-            $row = [];
-            foreach ($keyrow as $keyLetter ) {
-                $row[] = new Key($keyLetter, "active");
-            }
-            $this->keyboard[] = $row;
-        }
     }
 }

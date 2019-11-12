@@ -21,7 +21,7 @@ class Phrase implements Board
         "They Shoot Horses, Don't They?"
     ];
 
-    //It takes 2 optional parameters: a phrase as a string and an array of letters
+    //It takes 3 optional parameters: a phrase as a string, an array of letters, an index value as an integer
     public function __construct($currentPhrase = null, $selected = null, $previousPhraseIndex= null)
     {
        if (!empty($currentPhrase)) {
@@ -37,75 +37,6 @@ class Phrase implements Board
 
        //The phrase is converted in ar array of Letter objects
        $this->setArrayPhrase();
-    }
-
-    /*It takes no parameters
-    **It returns a string containing the HTML displaying the phrase */
-    public function display()
-    {
-        $phrase = "<div id='phrase' class='section'>";
-        $phrase .= $this->addPhraseToDisplay();
-        $phrase .= "</div>";
-
-        return $phrase;
-    }
-
-    /*It takes no parameters
-    **It returns a string containing the HTML specifically displaying the phrase */
-    private function addPhraseToDisplay()
-    {
-        //To prevent that words were cut off in the middle when the sentence is very long, each word is inserted inside a div
-        $phrase = "<div class='word'>";
-
-        foreach ($this->arrayPhrase as $letter) {
-            if ($letter->getCategory() == "space") {
-                $phrase .= "</div>";
-                $phrase .= "$letter";
-                $phrase .= "<div class='word'>";
-            } else {
-                $phrase .= "$letter";
-            }
-        }
-
-        $phrase .= "</div>";
-
-        return $phrase;
-    }
-
-    //It takes 2 optional parameters: a letter as a string and a status as a string
-    //According to the letter chosen by the user, it updates the Letter object status and enable/disable animation
-    public function update($letter= null, $newStatus = "show")
-    {
-        foreach ($this->arrayPhrase as $char) {
-            if ($letter == strtolower($char->getContent())) {
-                $char->setStatus($newStatus);
-                $char->setAnimate(true);
-            } else {
-                $char->setAnimate(false);
-            }
-        }
-    }
-
-    /*It takes one parameter: the letter chosen by the user as a string
-    **It returns tru if the letter matches with one letterin the phrase, otherwise it returns false*/
-    public function checkLetter($letter)
-    {
-        if (strpos(strtolower($this->currentPhrase), $letter) === false) {
-            return false;
-        }
-        return true;
-    }
-
-    public function getArrayPhrase() {
-        return $this->arrayPhrase;
-    }
-
-    public function getCurrentPhrase() {
-        return $this->currentPhrase;
-    }
-
-    public function getCurrentPhraseId() {
-        return $this->currentPhraseId;
     }
 
     /*It takes one optional parameter: the index of the previous phrase as an integer
@@ -144,5 +75,75 @@ class Phrase implements Board
                     break;
             }
         }
+    }
+
+    /*It takes no parameters
+    **It returns a string containing the HTML specifically displaying the phrase */
+    private function addPhraseToDisplay()
+    {
+        //To prevent that words were cut off in the middle when the sentence is very long, each word is inserted inside a div
+        $phrase = "<div class='word'>";
+
+        foreach ($this->arrayPhrase as $letter) {
+            if ($letter->getCategory() == "space") {
+                $phrase .= "</div>";
+                $phrase .= "$letter";
+                $phrase .= "<div class='word'>";
+            } else {
+                $phrase .= "$letter";
+            }
+        }
+
+        $phrase .= "</div>";
+
+        return $phrase;
+    }
+
+    /*It takes no parameters
+    **It returns a string containing the HTML displaying the phrase */
+    public function display()
+    {
+        $phrase = "<div id='phrase' class='section'>";
+        $phrase .= $this->addPhraseToDisplay();
+        $phrase .= "</div>";
+
+        return $phrase;
+    }
+
+    //It takes 2 optional parameters: a letter as a string and a status as a string
+    //According to the letter chosen by the user, it updates the Letter object status and enable/disable animation
+    public function update($letter= null, $newStatus = "show")
+    {
+        foreach ($this->arrayPhrase as $char) {
+            if ($letter == strtolower($char->getContent())) {
+                $char->setStatus($newStatus);
+                $char->setAnimate(true);
+            } else {
+                $char->setAnimate(false);
+            }
+        }
+    }
+
+    /*It takes one parameter: the letter chosen by the user as a string
+    **It returns tru if the letter matches with one letterin the phrase, otherwise it returns false*/
+    public function checkLetter($letter)
+    {
+        if (strpos(strtolower($this->currentPhrase), $letter) === false) {
+            return false;
+        }
+        return true;
+    }
+
+    //Getters
+    public function getArrayPhrase() {
+        return $this->arrayPhrase;
+    }
+
+    public function getCurrentPhrase() {
+        return $this->currentPhrase;
+    }
+
+    public function getCurrentPhraseId() {
+        return $this->currentPhraseId;
     }
 }

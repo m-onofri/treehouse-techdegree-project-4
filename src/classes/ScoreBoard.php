@@ -17,6 +17,24 @@ class ScoreBoard implements Board
     }
 
     /*It takes no parameters
+    **It returns a string containing the HTML specifically displaying the ScoreBoard */
+    private function create()
+    {
+        $lostLives = $this->lives - $this->remainingLives;
+        $result = "";
+
+        for ($i = 0; $i < $this->remainingLives; $i++) { 
+            $result .= " <li class='animated pulse tries'><img src='$this->urlLiveHeart' height='35px' widght='30px'></li>";
+         }
+ 
+         for ($i = 0; $i < $lostLives; $i++) { 
+             $result .= " <li class='tries'><img src='$this->urlLostHeart' height='35px' widght='30px'></li>";
+         }
+
+         return $result;
+    }
+
+    /*It takes no parameters
     **It returns a string containing the HTML displaying the ScoreBoard */
     public function display()
     {
@@ -36,24 +54,6 @@ class ScoreBoard implements Board
     public function update($key = NULL, $newStatus = NULL)
     {
         $this->remainingLives -= 1;
-    }
-
-    /*It takes no parameters
-    **It returns a string containing the HTML specifically displaying the ScoreBoard */
-    private function create()
-    {
-        $lostLives = $this->lives - $this->remainingLives;
-        $result = "";
-
-        for ($i = 0; $i < $this->remainingLives; $i++) { 
-            $result .= " <li class='animated pulse tries'><img src='$this->urlLiveHeart' height='35px' widght='30px'></li>";
-         }
- 
-         for ($i = 0; $i < $lostLives; $i++) { 
-             $result .= " <li class='tries'><img src='$this->urlLostHeart' height='35px' widght='30px'></li>";
-         }
-
-         return $result;
     }
 
     public function getRemainingLives()

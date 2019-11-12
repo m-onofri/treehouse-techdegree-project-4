@@ -41,6 +41,6 @@ Since both refer to alphabetic characters, they extend the *abstract class* **Ch
 
 ## Cross-browser consistency
 
-The project was checked on MacOS in Chrome, Firefox and Safari, and on these browsers it works properly.
+The project was checked on MacOS in Chrome, Firefox, Opera and Safari, and on these browsers it works properly.
 
 
