@@ -11,8 +11,8 @@
 	<li>You lost the game when you make 5 incorrect guesses.</li>
 </ul>
 		
-            <form action="play.php">
-                <input id="btn__reset" type="submit" value="Start Game" />
-            </form>
+<form action="play.php">
+	<input id="btn__reset" type="submit" value="Start Game" />
+</form>
 
-			<?php include('src/inc/footer.php'); ?>
+<?php include('src/inc/footer.php'); ?>
